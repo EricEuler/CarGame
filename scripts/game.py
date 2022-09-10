@@ -1,23 +1,17 @@
-import multiprocessing
-import random
 import pygame
-import _thread as thread
 import functions
 from functions import scale_image
-import sys
 import time
-import math
 import random
 import street_movement
-from multiprocessing import Process
 import threading
 
 
-STREET = pygame.image.load("Street2.png")
-STREET2 = pygame.image.load("Street2.png")
-CAR_BROKE_RED = scale_image(pygame.image.load("Car_broke_red.png"), 4.0)
-TRUCK_BROKE = scale_image(pygame.image.load("Truck_broke.png"), 4.0)
-YASSIN = pygame.image.load("Yassin.jpeg")
+STREET = pygame.image.load("../resources/Street2.png")
+STREET2 = pygame.image.load("../resources/Street2.png")
+CAR_BROKE_RED = scale_image(pygame.image.load("../resources/Car_broke_red.png"), 4.0)
+TRUCK_BROKE = scale_image(pygame.image.load("../resources/Truck_broke.png"), 4.0)
+YASSIN = pygame.image.load("../resources/Yassin.jpeg")
 pygame.mixer.init()
 STREET_WIDTH, STREET_HEIGHT = STREET.get_width(), STREET.get_height()
 crashed = False
@@ -53,15 +47,15 @@ def game(color):
     car_y = 860     # 860
 
     if color == "RED":
-        Car = scale_image(pygame.image.load("Car_red.png"), 4.0)
+        Car = scale_image(pygame.image.load("../resources/Car_red.png"), 4.0)
     if color == "GREEN":
-        Car = scale_image(pygame.image.load("Car_green.png"), 4.0)  # choose Color
+        Car = scale_image(pygame.image.load("../resources/Car_green.png"), 4.0)  # choose Color
     if color == "BLUE":
-        Car = scale_image(pygame.image.load("Car_blue.png"), 4.0)
+        Car = scale_image(pygame.image.load("../resources/Car_blue.png"), 4.0)
 
     WIN.blit(Car, (car_x, car_y))
 
-    pygame.mixer.music.load("Mario_soundtrack.wav")
+    pygame.mixer.music.load("../resources/Mario_soundtrack.wav")
     pygame.mixer.music.play(-1)
     pygame.mixer.music.set_volume(.06)                                                           # Music
     run_game = True
