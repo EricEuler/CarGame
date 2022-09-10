@@ -14,9 +14,12 @@ def get_font(size):  # Returns Press-Start-2P in the desired size
 
 
 def speed_increase():
+    global speed
     time.sleep(2)
     speed += 3
 
 
 def get_speed():
+    speed = 12
     return speed
+
