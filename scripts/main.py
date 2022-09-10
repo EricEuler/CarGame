@@ -107,7 +107,6 @@ def scoreboard():
 
 
 def main_menu():
-    global pressed_e
     while True:
         score_test = True
         SCREEN.blit(BG, (0, 0))
@@ -117,13 +116,13 @@ def main_menu():
         MENU_TEXT = functions.get_font(100).render("MAIN MENU", True, "#b68f40")
         MENU_RECT = MENU_TEXT.get_rect(center=(int(STREET_WIDTH) / 2, 100))
 
-        PLAY_BUTTON = Button(image=pygame.image.load("../resources/Play Rect.png"),
+        PLAY_BUTTON = Button(image=pygame.image.load("resources/Play Rect.png"),
                              pos=(int(STREET_WIDTH) / 2, 350),
                              text_input="PLAY", font=functions.get_font(75), base_color="#d7fcd4", hovering_color="White")
-        SCORE_BUTTON = Button(image=pygame.image.load("../resources/Options Rect.png"),
+        SCORE_BUTTON = Button(image=pygame.image.load("resources/Options Rect.png"),
                               pos=(int(STREET_WIDTH) / 2, 500),
                               text_input="SCOREBOARD", font=functions.get_font(75), base_color="#d7fcd4", hovering_color="White")
-        QUIT_BUTTON = Button(image=pygame.image.load("../resources/Quit Rect.png"),
+        QUIT_BUTTON = Button(image=pygame.image.load("resources/Quit Rect.png"),
                              pos=(int(STREET_WIDTH) / 2, 650),
                              text_input="QUIT", font=functions.get_font(75), base_color="#d7fcd4", hovering_color="White")
 
@@ -153,15 +152,15 @@ if __name__ == '__main__':
     pygame.init()
 
     SCREEN = pygame.display.set_mode((STREET_WIDTH, STREET_HEIGHT))
-    RED = scale_image(pygame.image.load("../resources/Car_red.png"), 4.0)
-    GREEN = scale_image(pygame.image.load("../resources/Car_green.png"), 4.0)
-    BLUE = scale_image(pygame.image.load("../resources/Car_blue.png"), 4.0)
-    CAR_RECT = pygame.image.load("../resources/Play Rect.png")
-    YASSIN = pygame.image.load("../resources/Yassin.jpeg")
+    RED = scale_image(pygame.image.load("resources/Car_red.png"), 4.0)
+    GREEN = scale_image(pygame.image.load("resources/Car_green.png"), 4.0)
+    BLUE = scale_image(pygame.image.load("resources/Car_blue.png"), 4.0)
+    CAR_RECT = pygame.image.load("resources/Play Rect.png")
+    YASSIN = pygame.image.load("resources/Yassin.jpeg")
     pygame.display.set_icon(YASSIN)
     pygame.display.set_caption("Menu")
 
-    BG = pygame.image.load("../resources/sand.jpg")
+    BG = pygame.image.load("resources/sand.jpg")
     scores = ["Eric", "Yassin", "Tim"]
 
     main_menu()

@@ -10,7 +10,7 @@ def scale_image(img, factor):
 
 
 def get_font(size):  # Returns Press-Start-2P in the desired size
-    return pygame.font.Font("Small Print.ttf", size)
+    return pygame.font.Font("resources/Small Print.ttf", size)
 
 
 def speed_increase():
