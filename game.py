@@ -1,7 +1,7 @@
 import multiprocessing
 import random
 import pygame
-import _thread
+import _thread as thread
 import functions
 from functions import scale_image
 import sys
@@ -13,11 +13,11 @@ from multiprocessing import Process
 import threading
 
 
-STREET = pygame.image.load("D:/PyCharm-Projects/CarGame/Street2.png")
-STREET2 = pygame.image.load("D:/PyCharm-Projects/CarGame/Street2.png")
-CAR_BROKE_RED = scale_image(pygame.image.load("D:/PyCharm-Projects/CarGame/Car_broke_red.png"), 4.0)
-TRUCK_BROKE = scale_image(pygame.image.load("D:/PyCharm-Projects/CarGame/Truck_broke.png"), 4.0)
-YASSIN = pygame.image.load("D:/PyCharm-Projects/CarGame/Yassin.jpeg")
+STREET = pygame.image.load("Street2.png")
+STREET2 = pygame.image.load("Street2.png")
+CAR_BROKE_RED = scale_image(pygame.image.load("Car_broke_red.png"), 4.0)
+TRUCK_BROKE = scale_image(pygame.image.load("Truck_broke.png"), 4.0)
+YASSIN = pygame.image.load("Yassin.jpeg")
 pygame.mixer.init()
 STREET_WIDTH, STREET_HEIGHT = STREET.get_width(), STREET.get_height()
 crashed = False
@@ -25,6 +25,7 @@ crashed = False
 
 def spawn_obstacle():
     while True:
+        time.sleep(2)
         print("Obstacle")
     while True:
         obstacle_x_1 = 100
@@ -52,18 +53,17 @@ def game(color):
     car_y = 860     # 860
 
     if color == "RED":
-        Car = scale_image(pygame.image.load("D:/PyCharm-Projects/CarGame/Car_red.png"), 4.0)
+        Car = scale_image(pygame.image.load("Car_red.png"), 4.0)
     if color == "GREEN":
-        Car = scale_image(pygame.image.load("D:/PyCharm-Projects/CarGame/Car_green.png"), 4.0)  # choose Color
+        Car = scale_image(pygame.image.load("Car_green.png"), 4.0)  # choose Color
     if color == "BLUE":
-        Car = scale_image(pygame.image.load("D:/PyCharm-Projects/CarGame/Car_blue.png"), 4.0)
+        Car = scale_image(pygame.image.load("Car_blue.png"), 4.0)
 
     WIN.blit(Car, (car_x, car_y))
 
-    pygame.mixer.music.load("D:/PyCharm-Projects/CarGame/Mario_soundtrack.wav")
+    pygame.mixer.music.load("Mario_soundtrack.wav")
     pygame.mixer.music.play(-1)
     pygame.mixer.music.set_volume(.06)                                                           # Music
-
     run_game = True
     while run_game:
         pygame.display.update()
@@ -97,26 +97,20 @@ def game(color):
             WIN.blit(TRUCK_BROKE, (120, 100))
         time.sleep(0.05)
 
+def print_time( threadName, delay):
+   count = 0
+   while count < 5:
+      time.sleep(delay)
+      count += 1
+      print("%s: %s" % (threadName, time.ctime(time.time())))
+
 
 def start_game(color):
-    try:
-        _thread.start_new_thread(game(color), ("Thread-1", 2,))
-        _thread.start_new_thread(spawn_obstacle(), ("Thread-2", 4,))
-    except:
-        print
-        "Error: unable to start thread"
 
-
-
-
-    #thr_obstacle = threading.Thread(target=spawn_obstacle(), args=(1,))
-    #thr_obstacle
-    #thr_game = threading.Thread(target=game(color), args=(1,))
-    #thr_game
-    #thr_street_movement = threading.Thread(target=street_movement.movement(functions.get_speed()), args=(1,))
-    #thr_street_movement
-    #thr_speed = threading.Thread(target=functions.speed_increase(), args=(1,))
-    #thr_speed
+     thr_game = threading.Thread(target=game, args=color).start()
+     thr_obstacle = threading.Thread(target=spawn_obstacle).start()
+     thr_street_movement = threading.Thread(target=street_movement.movement(functions.get_speed)).start()
+     thr_speed = threading.Thread(target=functions.speed_increase).start()
 
 
 pygame.quit()
