@@ -7,11 +7,11 @@ import street_movement
 import threading
 
 
-STREET = pygame.image.load("resources/Street2.png")
-STREET2 = pygame.image.load("resources/Street2.png")
-CAR_BROKE_RED = scale_image(pygame.image.load("resources/Car_broke_red.png"), 4.0)
-TRUCK_BROKE = scale_image(pygame.image.load("resources/Truck_broke.png"), 4.0)
-YASSIN = pygame.image.load("resources/Yassin.jpeg")
+STREET = pygame.image.load("../resources/Street2.png")
+STREET2 = pygame.image.load("../resources/Street2.png")
+CAR_BROKE_RED = scale_image(pygame.image.load("../resources/Car_broke_red.png"), 4.0)
+TRUCK_BROKE = scale_image(pygame.image.load("../resources/Truck_broke.png"), 4.0)
+YASSIN = pygame.image.load("../resources/Yassin.jpeg")
 pygame.mixer.init()
 STREET_WIDTH, STREET_HEIGHT = STREET.get_width(), STREET.get_height()
 crashed = False
