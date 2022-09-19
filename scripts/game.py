@@ -1,4 +1,6 @@
 import pygame
+from pygame.surface import Surface, SurfaceType
+
 import functions
 from functions import scale_image
 import time
@@ -14,12 +16,11 @@ YASSIN = pygame.image.load("../resources/Yassin.jpeg")
 pygame.mixer.init()
 STREET_WIDTH, STREET_HEIGHT = STREET.get_width(), STREET.get_height()
 crashed = False
+WIN = pygame.display.set_mode((STREET_WIDTH, STREET_HEIGHT))
+
 
 
 def spawn_obstacle():
-    while True:
-        time.sleep(2)
-        print("Obstacle")
     while True:
         obstacle_x_1 = 100
         obstacle_y_1 = 100
@@ -29,16 +30,15 @@ def spawn_obstacle():
         obstacle_y_3 = 0
         obstacle_x_4 = 0
         obstacle_y_4 = 0
-        # WIN.blit(CAR_BROKE_RED, (obstacle_x_1, obstacle_y_1)) #spawn the obstacle
+        WIN.blit(CAR_BROKE_RED, (obstacle_x_1, obstacle_y_1))  # spawn the obstacle
 
         random_int = random.randint(0, 3)
         if random_int == 0:  # Car Red Broke
             print("Random 0")
 
 
-def game():
+def game(color):
     color = "RED"
-    WIN = pygame.display.set_mode((STREET_WIDTH, STREET_HEIGHT))
     pygame.display.set_caption("Yalla Yassin!")
     pygame.display.set_icon(YASSIN)
     WIN.blit(STREET, (0, 0))
@@ -88,23 +88,17 @@ def game():
 
             WIN.blit(STREET, (0, 0))
             WIN.blit(Car, (car_x, car_y))
-            WIN.blit(TRUCK_BROKE, (120, 100))
         time.sleep(0.05)
 
 
-
 def start_game(color):
-    thr_game = threading.Thread(target=game)
+    thr_game = threading.Thread(target=game, args=color)
     thr_obstacle = threading.Thread(target=spawn_obstacle)
     # thr_street_movement = threading.Thread(target=street_movement.movement, args=12)
     # thr_speed = threading.Thread(target=functions.speed_increase)
     thr_obstacle.start()
     thr_game.run()
-# thr_street_movement.start()
-# thr_speed.start()
 
-# thr_street_movement = threading.Thread(target=street_movement.movement(functions.get_speed()), args=(1,))
-# thr_speed = threading.Thread(target=functions.speed_increase(), args=(1,))
 
 
 pygame.quit()

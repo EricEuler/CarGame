@@ -1,5 +1,4 @@
 import pygame
-
 import functions
 import game
 from functions import scale_image, get_font
@@ -24,7 +23,6 @@ def play():
                              text_input="", font=functions.get_font(75), base_color="Black", hovering_color="GREY")
         GREEN_BUTTON = Button(image=GREEN, pos=(int(STREET_WIDTH) / 4 * 3, 500),
                               text_input="", font=functions.get_font(75), base_color="Black", hovering_color="GREY")
-
 
         CAR_TEXT = functions.get_font(45).render("Choose a Car!", True, "BLACK")
         PLAY_RECT = CAR_TEXT.get_rect(center=(int(STREET_WIDTH) / 2, 100))
@@ -70,27 +68,33 @@ def play():
 
 
 def scoreboard():
-    score_test = True
+    score_pos = 700
     SCREEN.blit(BG, (0, 0))
+    font_size = 40
+    scoreboard_number = 5
+
+    for x in scores:
+        SCOREBOARD_NUMBER = get_font(font_size).render(str(scoreboard_number), True, "#96453e")
+        SCOREBOARD_NUMBER.get_rect(center=(int(STREET_WIDTH) - 100 / 2, 150))
+        SCREEN.blit(SCOREBOARD_NUMBER, (STREET_WIDTH / 2 - 150, score_pos))
+        SCOREBOARD_TEXT = get_font(font_size).render(x, True, "#96453e")
+        SCOREBOARD_TEXT.get_rect(center=(int(STREET_WIDTH)-100 / 2, 150))
+        SCREEN.blit(SCOREBOARD_TEXT, (STREET_WIDTH/2-100, score_pos))
+        print(score_pos)
+        score_pos -= 100
+        font_size +=10
+        scoreboard_number -=1
+
     while True:
         SCORE_MOUSE_POS = pygame.mouse.get_pos()
 
-        SCREEN.fill("white")
+        SCORE_TEXT = get_font(font_size).render("The Hall of Fame!", True, "white")
 
-        SCORE_TEXT = get_font(45).render("This is the SCOREBOARD.", True, "Black")
-
-        if score_test:
-            for x in scores:
-                SCOREBOARD_TEXT = get_font(25).render(x, True, "Black")  ##########
-                SCOREBOARD_TEXT.get_rect(center=(int(STREET_WIDTH) / 2, 150))
-                SCREEN.blit(SCOREBOARD_TEXT)
-
-        score_test = False
         SCORE_RECT = SCORE_TEXT.get_rect(center=(int(STREET_WIDTH) / 2, 60))
         SCREEN.blit(SCORE_TEXT, SCORE_RECT)
 
         SCORE_BACK = Button(image=None, pos=(150, 900),
-                            text_input="BACK", font=functions.get_font(75), base_color="Black", hovering_color="Green")
+                            text_input="BACK", font=functions.get_font(75), base_color="white", hovering_color="black")
 
         SCORE_BACK.changeColor(SCORE_MOUSE_POS)
         SCORE_BACK.update(SCREEN)
@@ -113,18 +117,21 @@ def main_menu():
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()
 
-        MENU_TEXT = functions.get_font(100).render("MAIN MENU", True, "#b68f40")
+        MENU_TEXT = functions.get_font(100).render("MAIN MENU", True, "white")
         MENU_RECT = MENU_TEXT.get_rect(center=(int(STREET_WIDTH) / 2, 100))
 
         PLAY_BUTTON = Button(image=pygame.image.load("../resources/Play Rect.png"),
                              pos=(int(STREET_WIDTH) / 2, 350),
-                             text_input="PLAY", font=functions.get_font(75), base_color="#d7fcd4", hovering_color="White")
+                             text_input="PLAY", font=functions.get_font(75), base_color="#96453e",
+                             hovering_color="White")
         SCORE_BUTTON = Button(image=pygame.image.load("../resources/Options Rect.png"),
                               pos=(int(STREET_WIDTH) / 2, 500),
-                              text_input="SCOREBOARD", font=functions.get_font(75), base_color="#d7fcd4", hovering_color="White")
+                              text_input="SCOREBOARD", font=functions.get_font(75), base_color="#96453e",
+                              hovering_color="White")
         QUIT_BUTTON = Button(image=pygame.image.load("../resources/Quit Rect.png"),
                              pos=(int(STREET_WIDTH) / 2, 650),
-                             text_input="QUIT", font=functions.get_font(75), base_color="#d7fcd4", hovering_color="White")
+                             text_input="QUIT", font=functions.get_font(75), base_color="#96453e",
+                             hovering_color="White")
 
         SCREEN.blit(MENU_TEXT, MENU_RECT)
 
@@ -159,8 +166,7 @@ if __name__ == '__main__':
     YASSIN = pygame.image.load("../resources/Yassin.jpeg")
     pygame.display.set_icon(YASSIN)
     pygame.display.set_caption("Menu")
-
     BG = pygame.image.load("../resources/sand.jpg")
-    scores = ["Eric", "Yassin", "Tim"]
+    scores = ["Eric 700", "Yassin 800", "Tim 1000", "Mike 1050", "EricTest 1200"]
 
     main_menu()
